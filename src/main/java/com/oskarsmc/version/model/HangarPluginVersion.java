@@ -16,6 +16,12 @@ public final class HangarPluginVersion {
     private final Date created;
     private final String description;
 
+    /**
+     * In
+     * @param name
+     * @param created
+     * @param description
+     */
     public HangarPluginVersion(String name, Date created, String description) {
         this.name = name;
         this.created = created;

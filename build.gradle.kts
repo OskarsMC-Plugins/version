@@ -20,7 +20,6 @@ dependencies {
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
     implementation("com.google.code.gson:gson:2.10.1")
-
 }
 
 tasks.getByName<Test>("test") {
@@ -39,12 +38,16 @@ publishing {
     }
     repositories {
         maven {
+            name = "oskarsmc-repository"
             val releasesRepoUrl = uri("https://repository.oskarsmc.com/releases")
             val snapshotsRepoUrl = uri("https://repository.oskarsmc.com/snapshots")
             url = if (version.toString().endsWith("SNAPSHOT")) snapshotsRepoUrl else releasesRepoUrl
             credentials {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_SECRET")
+            }
+            authentication {
+                create<BasicAuthentication>("basic")
             }
         }
     }
