@@ -27,15 +27,6 @@ tasks.getByName<Test>("test") {
 }
 
 publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            groupId = project.group as String?
-            artifactId = project.name
-            version = project.version as String?
-
-            from(components["java"])
-        }
-    }
     repositories {
         maven {
             name = "oskarsmc-repository"
@@ -46,9 +37,15 @@ publishing {
                 username = System.getenv("MAVEN_USERNAME")
                 password = System.getenv("MAVEN_SECRET")
             }
-            authentication {
-                create<BasicAuthentication>("basic")
-            }
+        }
+    }
+    publications {
+        create<MavenPublication>("maven") {
+            groupId = project.group as String?
+            artifactId = project.name
+            version = project.version as String?
+
+            from(components["java"])
         }
     }
 }
